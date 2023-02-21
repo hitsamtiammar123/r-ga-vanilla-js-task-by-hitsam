@@ -1,0 +1,32 @@
+body {margin: 0; padding: 0;}
+#container {width: 100vw; height: 100vh;}
+.datepickerContainer{
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.datepicker{
+  display: flex;
+  width: 300px;
+  flex-direction: column;
+}
+
+.backdrop{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: gray;
+  opacity: 0.5;
+  display: none;
+  z-index: 1;
+  align-items: center;
+  justify-content: center;
+}
