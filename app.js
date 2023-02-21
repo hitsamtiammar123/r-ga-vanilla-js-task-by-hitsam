@@ -2,6 +2,7 @@
   const backdrop = document.querySelector('.backdrop');
   const totalTaxiElem = document.getElementById('total-taxi');
   const timestampTaxi = document.getElementById('timestamp-taxi');
+  var currDate = null;
 
   const deckgl = new deck.DeckGL({
     container: 'container',
@@ -64,7 +65,6 @@ function loadData(date = ''){
   return fetch('https://api.data.gov.sg/v1/transport/taxi-availability' + params)
   .then(res => res.json())
   .then((res) => {
-    console.log({ res });
     if(res.features){
       var feature = res.features[0]
       var data = feature.geometry.coordinates;
@@ -97,10 +97,14 @@ function loadData(date = ''){
     enableTime: true,
     dateFormat: "m/d/Y h:i K",
     maxDate: new Date(),
-    onClose: function(selectedDates, dateStr, instance){
-      console.log('onClose', {selectedDates, dateStr, instance})
-      var date = selectedDates[0].toISOString().slice(0, 19);
-      loadData(date);
+    onClose: function(selectedDates){
+      var date = selectedDates[0];
+      if(currDate !== null && date.getTime() === currDate.getTime()){
+        return;
+      }
+      var dateStr = selectedDates[0].toISOString().slice(0, 19);
+      currDate = selectedDates[0];
+      loadData(dateStr);
     },
     minuteIncrement: 60,
   });

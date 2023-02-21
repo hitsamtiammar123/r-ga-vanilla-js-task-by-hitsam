@@ -7,3 +7,5 @@ Hi, here is my javascript exercise with Vanilla JS version. I made this just for
 - I use ``flatpickr`` as datetime library
 - I dont use many complex style here. Just make simple flexbox and standard input
 - I implement every DeckGL implementation as same as on react javascript version
+- For development purpose, I use [live-server](https://www.npmjs.com/package/live-server)
+
