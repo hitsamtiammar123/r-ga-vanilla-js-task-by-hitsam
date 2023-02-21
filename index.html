@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <!-- deck.gl standalone bundle -->
+    <script src="https://unpkg.com/deck.gl@^8.8.0/dist.min.js"></script>
+
+    <!-- Mapbox dependencies -->
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.js"></script>
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.css" rel="stylesheet" />
+
+    <style type="text/css">
+      body {margin: 0; padding: 0;}
+      #container {width: 100vw; height: 100vh;}
+    </style>
+  </head>
+
+  <body>
+    <div id="container"></div>
+  </body>
+
+  <script type="text/javascript" src="dummy-data.js"></script>
+  <script type="text/javascript">
+
+// source: Natural Earth http://www.naturalearthdata.com/ via geojson.xyz
+const AIR_PORTS =
+  'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_10m_airports.geojson';
+
+
+const deckgl = new deck.DeckGL({
+  container: 'container',
+  // Set your Mapbox access token here
+  //mapboxApiAccessToken: '<your mapbox token>',
+    mapStyle: 'https://basemaps.cartocdn.com/gl/positron-nolabels-gl-style/style.json',
+  initialViewState: {
+    longitude: 103.703010666667,
+    latitude: 1.3374685,
+    zoom: 14,
+    pitch: 0,
+    bearing: 0,
+  },
+  controller: true,
+
+  layers: [
+  new deck.ScatterplotLayer({
+    data: dummyData.features[0].geometry.coordinates,
+    opacity: 0.4,
+    radiusScale: 2,
+    radiusMinPixels: 1,
+    wrapLongitude: true,
+
+    getPosition: (d) => [d[0], d[1]],
+    getRadius: () => 20,
+    getFillColor: () => {
+      return [160, 160, 160];
+    },
+
+    pickable: true,
+  })]
+});
+  </script>
+</html>
